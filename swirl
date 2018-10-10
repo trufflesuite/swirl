@@ -1,0 +1,202 @@
+#!/bin/bash
+
+function printHelpAndExit () {
+	echo "Help           | Display this MENU."
+	echo "Enter any valid JSON RPC method and parameters"
+	echo "Options:"
+	echo "-a newAddress -p port -P protocol"
+	echo "Full Example:"
+	printf "> swirl -a localhost -p 8545 -P https eth_getTransactionByHash 0x0...\n"
+	printf "curl -H \"Content-Type: application/json\" -X POST --data \"{'id':120,'jsonrpc':'2.0','method':'eth_getTransactionByHash','params':'0x0..'}\" https://localhost:8545\n\n"
+	echo "Default: http://localhost:7545"
+	printf "> swirl eth_getTransactionByHash 0x0...\n"
+	printf "curl -H \"Content-Type: application/json\" -X POST --data \"{'id':120,'jsonrpc':'2.0','method':'eth_getTransactionByHash','params':'0x0..'}\" http://localhost:7545\n\n"
+	echo "Run consecutive calls:"
+	printf "> swirl eth_getTransactionByHash 0x0... eth_sendTransaction [params...]\n\n"
+	printf "Installation:\nmv swirl ~/bin && chmod a+x ~/bin/swirl\n"
+	printf "\nTABTAB for JSON RPC bash completions.\n touch ~/.bash_completion && cat swirl_completion >> ~/.bash_completion && source ~/.bashrc\n"
+	exit 0
+}
+
+function swirl_curl() {
+	host="$protocol://$address:$port"
+	echo "curl -H \"Content-Type: application/json\" -X POST --data '{\"id\":120,\"jsonrpc\":\"2.0\",\"method\":\"$1\",\"params\":$2}' $host"
+	curl -H "Content-Type: application/json" -X POST --data "{\"id\":120,\"jsonrpc\":\"2.0\",\"method\":\"$1\",\"params\":$2}" $host
+}
+
+if [ -z "$1" ]
+then
+	printHelpAndExit 1
+fi
+
+protocol="http"
+address="localhost"
+port="7545"
+
+while [ "$1" != "" ]; do
+	case "$1" in
+		-*)
+			re=^-[apP]{1}$
+			while [[ "$1" =~ ${re} ]]; do
+				case "$1" in
+					-p)
+						port="$2"
+						;;
+					-a)
+						address="$2"
+						;;
+					-P)
+						protocol="$2"
+						;;
+					-*)
+						echo "h for host, p for port, a for address, P for protocol."
+						exit 0
+						;;
+				esac
+				shift;shift
+			done
+			echo "$protocol://$address:$port"
+			;;
+		web3_clientVersin)
+			;&
+		web3_sha3)
+			;&
+		net_version)
+			;&
+		net_peerCount)
+			;&
+		net_listening)
+			;&
+		eth_protocolVersion)
+			;&
+		eth_syncing)
+			;&
+		eth_coinbase)
+			;&
+		eth_mining)
+			;&
+		eth_hashrate)
+			;&
+		eth_gasPrice)
+			;&
+		eth_accounts)
+			;&
+		eth_blockNumber)
+			;&
+		eth_getBalance)
+			;&
+		eth_getStorageAt)
+			;&
+		eth_getBlockTransactionCountByHash)
+			;&
+		eth_getBlockTransactionCountByNumber)
+			;&
+		eth_getUncleCountByBlockHash)
+			;&
+		eth_getUncleCountByBlockNumber)
+			;&
+		eth_sendRawTransaction)
+			;&
+		eth_getTransactionByHash)
+			;&
+		eth_getTransactionReceipt)
+			;&
+		eth_getCompilers)
+			;&
+		eth_compileLLL)
+			;&
+		eth_compileSolidity)
+			;&
+		eth_compileSerpent)
+			;&
+		eth_newBlockFilter)
+			;&
+		eth_newPendingTransactionFilter)
+			;&
+		eth_uninstallFilter)
+			;&
+		eth_getFilterChanges)
+			;&
+		eth_getFilterLogs)
+			;&
+		eth_getWork)
+			;&
+		shh_version)
+			;&
+		shh_newIdentity)
+			;&
+		shh_hasIdentity)
+			;&
+		shh_newGroup)
+			;&
+		shh_addToGroup)
+			;&
+		shh_uninstallFilter)
+			;&
+		shh_getMessages)
+			swirl_curl $1 "[\"$2\"]"
+			shift;shift
+			;;
+		eth_newFilter)
+			;&
+		eth_sendTransaction)
+			;&
+		eth_call)
+			;&
+		eth_getLogs)
+			;&
+		eth_estimateGas)
+			swirl_curl $1 "[$2]"
+			shift;shift
+			;;
+		shh_post)
+			;&
+		shh_newFilter)
+			;&
+		shh_getFilterChanges)
+			;&
+		eth_getBlockByHash)
+			;&
+		eth_getBlockByNumber)
+			swirl_curl $1 "[\"$2\", $3]"
+			shift;shift;shift
+			;;
+		eth_getUncleByBlockHashAndIndex)
+			;&
+		eth_getUncleByBlockNumberAndIndex)
+			;&
+		eth_getTransactionByBlockHashAndIndex)
+			;&
+		eth_getTransactionByBlockNumberAndIndex)
+			;&
+		db_getString)
+			;&
+		db_getHex)
+			;&
+		eth_getCode)
+			;&
+		eth_getTransactionCount)
+			;&
+		eth_submitHashrate)
+			;&
+		eth_sign)
+			swirl_curl $1 "[\"$2\", \"$3\"]"
+			shift;shift;shift
+			;;
+		eth_submitWork)
+			;&
+		db_putString)
+			;&
+		db_putHex)
+			;&
+		eth_getStorageAt)
+			swirl_curl $1 "[\"$2\", \"$3\", "$4"]"
+			shift;shift;shift;shift
+			;;
+		*)
+			printHelpAndExit 0
+		    ;;
+	esac
+done
+
+exit 0
