@@ -7,10 +7,10 @@ function printHelpAndExit () {
 	echo "-a newAddress -p port -P protocol"
 	echo "Full Example:"
 	printf "> swirl -a localhost -p 8545 -P https eth_getTransactionByHash 0x0...\n"
-	printf "curl -H \"Content-Type: application/json\" -X POST --data \"{'id':120,'jsonrpc':'2.0','method':'eth_getTransactionByHash','params':'0x0..'}\" https://localhost:8545\n\n"
-	echo "Default: http://localhost:7545"
+	printf "curl -H \"Content-Type: application/json\" -X POST --data \"{'id':120,'jsonrpc':'2.0','method':'eth_getTransactionByHash','params':'0x0..'}\" https://localhost:7545\n\n"
+	echo "Default: http://localhost:8545"
 	printf "> swirl eth_getTransactionByHash 0x0...\n"
-	printf "curl -H \"Content-Type: application/json\" -X POST --data \"{'id':120,'jsonrpc':'2.0','method':'eth_getTransactionByHash','params':'0x0..'}\" http://localhost:7545\n\n"
+	printf "curl -H \"Content-Type: application/json\" -X POST --data \"{'id':120,'jsonrpc':'2.0','method':'eth_getTransactionByHash','params':'0x0..'}\" http://localhost:8545\n\n"
 	echo "Run consecutive calls:"
 	printf "> swirl eth_getTransactionByHash 0x0... eth_sendTransaction [params...]\n\n"
 	printf "Installation:\nmv swirl ~/bin && chmod a+x ~/bin/swirl\n"
@@ -31,7 +31,7 @@ fi
 
 protocol="http"
 address="localhost"
-port="7545"
+port="8545"
 
 while [ "$1" != "" ]; do
 	case "$1" in
@@ -57,31 +57,45 @@ while [ "$1" != "" ]; do
 			done
 			echo "$protocol://$address:$port"
 			;;
-		web3_clientVersin)
+		eth_accounts)
 			;&
-		web3_sha3)
+		eth_hashrate)
 			;&
-		net_version)
+		eth_mining)
+			;&
+		eth_coinbase)
+			;&
+		eth_syncing)
+			;&
+		eth_protocolVersion)
 			;&
 		net_peerCount)
 			;&
 		net_listening)
 			;&
-		eth_protocolVersion)
+		web3_clientVersin)
 			;&
-		eth_syncing)
+		eth_getCompilers)
 			;&
-		eth_coinbase)
+		eth_newBlockFilter)
 			;&
-		eth_mining)
+		eth_getWork)
 			;&
-		eth_hashrate)
+		shh_version)
 			;&
-		eth_gasPrice)
+		shh_newIdentity)
 			;&
-		eth_accounts)
+		shh_newGroup)
+			;&
+		net_version)
 			;&
 		eth_blockNumber)
+			swirl_curl $1 "[]"
+			shift;
+			;;
+		web3_sha3)
+			;&
+		eth_gasPrice)
 			;&
 		eth_getBalance)
 			;&
@@ -101,15 +115,11 @@ while [ "$1" != "" ]; do
 			;&
 		eth_getTransactionReceipt)
 			;&
-		eth_getCompilers)
-			;&
 		eth_compileLLL)
 			;&
 		eth_compileSolidity)
 			;&
 		eth_compileSerpent)
-			;&
-		eth_newBlockFilter)
 			;&
 		eth_newPendingTransactionFilter)
 			;&
@@ -119,15 +129,7 @@ while [ "$1" != "" ]; do
 			;&
 		eth_getFilterLogs)
 			;&
-		eth_getWork)
-			;&
-		shh_version)
-			;&
-		shh_newIdentity)
-			;&
 		shh_hasIdentity)
-			;&
-		shh_newGroup)
 			;&
 		shh_addToGroup)
 			;&
