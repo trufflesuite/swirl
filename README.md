@@ -5,11 +5,13 @@ Make curl easier with ethereum bash completions.
 Enter any valid JSON RPC method and parameters
 
 ## Options
--a newAddress -p port -P protocol
+-a newAddress
+-p port
+-P protocol
 
 ## Full Example
 ```bash
-swirl -a localhost -p 8545 -P https eth_getTransactionByHash 0x0...
+swirl -a localhost -p 7545 -P https eth_getTransactionByHash 0x0...
 curl -H "Content-Type: application/json" -X POST --data "{'id':120,'jsonrpc':'2.0','method':'eth_getTransactionByHash','params':'0x0..'}" https://localhost:7545
 ```
 
@@ -17,6 +19,11 @@ curl -H "Content-Type: application/json" -X POST --data "{'id':120,'jsonrpc':'2.
 ```bash
 swirl eth_getTransactionByHash 0x0...
 curl -H "Content-Type: application/json" -X POST --data "{'id':120,'jsonrpc':'2.0','method':'eth_getTransactionByHash','params':'0x0..'}" http://localhost:8545
+```
+
+```bash
+swirl eth_getBlockByNumber 0xb true
+curl -H "Content-Type: application/json" -X POST --data '{"id":120,"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["0xb", true]}' http://localhost:8545
 ```
 
 ## Run consecutive calls:
