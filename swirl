@@ -89,13 +89,13 @@ while [ "$1" != "" ]; do
 			;&
 		net_version)
 			;&
+		eth_gasPrice)
+			;&
 		eth_blockNumber)
 			swirl_curl $1 "[]"
 			shift;
 			;;
 		web3_sha3)
-			;&
-		eth_gasPrice)
 			;&
 		eth_getBalance)
 			;&
