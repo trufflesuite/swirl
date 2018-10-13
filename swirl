@@ -12,26 +12,34 @@ function printHelpAndExit () {
 	printf "> swirl eth_getTransactionByHash 0x0...\n"
 	printf "curl -H \"Content-Type: application/json\" -X POST --data \"{'id':120,'jsonrpc':'2.0','method':'eth_getTransactionByHash','params':'0x0..'}\" http://localhost:8545\n\n"
 	echo "Run consecutive calls:"
-	printf "> swirl eth_getTransactionByHash 0x0... eth_sendTransaction [params...]\n\n"
+	printf "> swirl eth_getTransactionByHash 0x0...  eth_sendTransaction \"{'value': '0x10000000', 'gas': '0xf4240', 'from': '0x...' etc.. }\"\n\n"
 	printf "Installation:\nmv swirl ~/bin && chmod a+x ~/bin/swirl\n"
 	printf "\nTABTAB for JSON RPC bash completions.\n touch ~/.bash_completion && cat swirl_completion >> ~/.bash_completion && source ~/.bashrc\n"
 	exit 0
 }
 
 function swirl_curl() {
-	host="$protocol://$address:$port"
-	echo "curl -H \"Content-Type: application/json\" -X POST --data '{\"id\":120,\"jsonrpc\":\"2.0\",\"method\":\"$1\",\"params\":$2}' $host"
+	local host="$protocol://$address:$port"
+	echo "curl -H \"Content-Type: application/json\" -X POST --data \"{\"id\":120,\"jsonrpc\":\"2.0\",\"method\":\"$1\",\"params\":$2}\" $host"
 	curl -H "Content-Type: application/json" -X POST --data "{\"id\":120,\"jsonrpc\":\"2.0\",\"method\":\"$1\",\"params\":$2}" $host
 }
 
-if [ -z "$1" ]
-then
+function is_array(){
+  local re=^[[].*[]]$
+  params="[$1]"
+    if [[ "$1" =~ ${re} ]]; then
+      params="$1"
+    fi
+}
+
+if [ -z "$1" ]; then
 	printHelpAndExit 1
 fi
 
 protocol="http"
 address="localhost"
 port="8545"
+params=""
 
 while [ "$1" != "" ]; do
 	case "$1" in
@@ -49,7 +57,7 @@ while [ "$1" != "" ]; do
 						protocol="$2"
 						;;
 					-*)
-						echo "h for host, p for port, a for address, P for protocol."
+						echo "p for port, a for address, P for protocol."
 						exit 0
 						;;
 				esac
@@ -127,6 +135,8 @@ while [ "$1" != "" ]; do
 			;&
 		eth_getFilterChanges)
 			;&
+    shh_getFilterChanges)
+			;&
 		eth_getFilterLogs)
 			;&
 		shh_hasIdentity)
@@ -141,26 +151,30 @@ while [ "$1" != "" ]; do
 			;;
 		eth_newFilter)
 			;&
-		eth_sendTransaction)
-			;&
-		eth_call)
-			;&
 		eth_getLogs)
 			;&
 		eth_estimateGas)
-			swirl_curl $1 "[$2]"
+			swirl_curl $1 "$2"
 			shift;shift
 			;;
-		shh_post)
+		eth_call)
 			;&
-		shh_newFilter)
-			;&
-		shh_getFilterChanges)
-			;&
+		eth_sendTransaction)
+      is_array "$2"
+			swirl_curl $1 "$params"
+			shift;shift
+			;;
 		eth_getBlockByHash)
 			;&
 		eth_getBlockByNumber)
 			swirl_curl $1 "[\"$2\", $3]"
+			shift;shift;shift
+      ;;
+		shh_post)
+			;&
+		shh_newFilter)
+      is_array "$3"
+			swirl_curl $1 "[\"$2\", $params]"
 			shift;shift;shift
 			;;
 		eth_getUncleByBlockHashAndIndex)
@@ -192,7 +206,7 @@ while [ "$1" != "" ]; do
 		db_putHex)
 			;&
 		eth_getStorageAt)
-			swirl_curl $1 "[\"$2\", \"$3\", "$4"]"
+			swirl_curl $1 "[\"$2\", \"$3\", \"$4\"]"
 			shift;shift;shift;shift
 			;;
 		*)
