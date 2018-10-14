@@ -53,3 +53,7 @@ cp swirl ~/bin && chmod +x ~/bin/swirl
 ```bash
 touch ~/.bash_completion && cat swirl_completion >> ~/.bash_completion && source ~/.bashrc
 ```
+
+
+#### TODO
+zsh support

@@ -2,14 +2,14 @@
 
 mkdir -p ~/bin
 touch ~/bin/swirl
-success='### SUCCESS: Swirl is up-to-date! ###'
-install='### INSTALLED: The latest version of swirl is now installed! ###'
+success='### Swirl is up-to-date! ###'
+install='### Swirl updated/installed! ###'
 cmp --silent ~/bin/swirl swirl && echo $success || (cp swirl ~/bin && chmod +x ~/bin/swirl && echo $install)
 menu_list=$(cat menu_list)
 touch ~/.bash_completion
 if grep -q "'$menu_list'" ~/.bash_completion
 then # If found
-  echo "### Bash completions up to date. ###"
+  echo "### Swirl completions are up to date. ###"
 else
   old_list="compgen -W '[_ a-zA-Z3]*' -- \$swirl_arg"
   if grep -q "$old_list" ~/.bash_completion

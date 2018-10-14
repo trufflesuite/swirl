@@ -13,8 +13,6 @@ function printHelpAndExit () {
 	printf "curl -H \"Content-Type: application/json\" -X POST --data \"{'id':120,'jsonrpc':'2.0','method':'eth_getTransactionByHash','params':'0x0..'}\" http://localhost:8545\n\n"
 	echo "Run consecutive calls:"
 	printf "> swirl eth_getTransactionByHash 0x0...  eth_sendTransaction \"{'value': '0x10000000', 'gas': '0xf4240', 'from': '0x...' etc.. }\"\n\n"
-	printf "Installation:\nmv swirl ~/bin && chmod a+x ~/bin/swirl\n"
-	printf "\nTABTAB for JSON RPC bash completions.\n touch ~/.bash_completion && cat swirl_completion >> ~/.bash_completion && source ~/.bashrc\n"
 	exit 0
 }
 
@@ -135,7 +133,7 @@ while [ "$1" != "" ]; do
 			;&
 		eth_getFilterChanges)
 			;&
-    shh_getFilterChanges)
+		shh_getFilterChanges)
 			;&
 		eth_getFilterLogs)
 			;&
@@ -160,7 +158,7 @@ while [ "$1" != "" ]; do
 		eth_call)
 			;&
 		eth_sendTransaction)
-      is_array "$2"
+			is_array "$2"
 			swirl_curl $1 "$params"
 			shift;shift
 			;;
@@ -169,11 +167,11 @@ while [ "$1" != "" ]; do
 		eth_getBlockByNumber)
 			swirl_curl $1 "[\"$2\", $3]"
 			shift;shift;shift
-      ;;
+      			;;
 		shh_post)
 			;&
 		shh_newFilter)
-      is_array "$3"
+      			is_array "$3"
 			swirl_curl $1 "[\"$2\", $params]"
 			shift;shift;shift
 			;;
@@ -211,7 +209,7 @@ while [ "$1" != "" ]; do
 			;;
 		*)
 			printHelpAndExit 0
-		    ;;
+		    	;;
 	esac
 done
 
