@@ -21,7 +21,7 @@ else
     cat swirl_completion >> ~/.bash_completion && sed -i -e "s/__SWIRL_MENU_LIST__/$menu_list/g" ~/.bash_completion
     echo "### Completions Installed. ###"
   fi
-  source ~/.bashrc
+  . ~/.bashrc
 fi
 
 exit 0

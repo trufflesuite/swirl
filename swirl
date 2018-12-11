@@ -18,8 +18,8 @@ function printHelpAndExit () {
 
 function swirl_curl() {
 	local host="$protocol://$address:$port"
-	echo "curl -H \"Content-Type: application/json\" -X POST --data \"{\"id\":120,\"jsonrpc\":\"2.0\",\"method\":\"$1\",\"params\":$2}\" $host"
-	curl -H "Content-Type: application/json" -X POST --data "{\"id\":120,\"jsonrpc\":\"2.0\",\"method\":\"$1\",\"params\":$2}" $host
+	echo "curl -H \"Content-Type: application/json\" -X POST --data '{\"id\":1337,\"jsonrpc\":\"2.0\",\"method\":\"$1\",\"params\":$2}' $host"
+	curl -H "Content-Type: application/json" -X POST --data "{\"id\":1337,\"jsonrpc\":\"2.0\",\"method\":\"$1\",\"params\":$2}" $host
 }
 
 function is_array(){
@@ -98,6 +98,8 @@ while [ "$1" != "" ]; do
 		eth_gasPrice)
 			;&
 		eth_blockNumber)
+			;&
+		evm_snapshot)
 			swirl_curl $1 "[]"
 			shift;
 			;;
@@ -144,6 +146,16 @@ while [ "$1" != "" ]; do
 		shh_uninstallFilter)
 			;&
 		shh_getMessages)
+			;&
+		eth_subscribe)
+			;&
+		eth_unsubscribe)
+			;&
+		evm_mine)
+			;&
+		evm_revert)
+			;&
+		evm_increaseTime)
 			swirl_curl $1 "[\"$2\"]"
 			shift;shift
 			;;
