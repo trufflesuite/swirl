@@ -37,7 +37,7 @@ curl -H "Content-Type: application/json" -X POST --data '{"id":120,"jsonrpc":"2.
 swirl eth_getTransactionByHash 0x0...  eth_sendTransaction '{"value": "0x10000000", "as": "0xf4240", "from" "0x..." etc.. }'
 ```
 
-## Installation:
+## Install/Upgrade:
 ```bash
 chmod +x install.sh
 ./install.sh
@@ -56,4 +56,4 @@ touch ~/.bash_completion && cat swirl_completion >> ~/.bash_completion && source
 
 
 #### TODO
-zsh support
+Rich ZSH support
