@@ -18,8 +18,9 @@ function printHelpAndExit () {
 
 function swirl_curl() {
 	local host="$protocol://$address:$port"
-	echo "curl -H \"Content-Type: application/json\" -X POST --data '{\"id\":1337,\"jsonrpc\":\"2.0\",\"method\":\"$1\",\"params\":$2}' $host"
-	curl -H "Content-Type: application/json" -X POST --data "{\"id\":1337,\"jsonrpc\":\"2.0\",\"method\":\"$1\",\"params\":$2}" $host
+	printf "curl -H \"Content-Type: application/json\" -X POST --data '{\"id\":1337,\"jsonrpc\":\"2.0\",\"method\":\"$1\",\"params\":$2}' $host\n\n"
+	curl -s -H "Content-Type: application/json" -X POST --data "{\"id\":1337,\"jsonrpc\":\"2.0\",\"method\":\"$1\",\"params\":$2}" $host | python -m json.tool | pygmentize -l javascript
+	echo ""
 }
 
 function is_array(){
@@ -179,11 +180,11 @@ while [ "$1" != "" ]; do
 		eth_getBlockByNumber)
 			swirl_curl $1 "[\"$2\", $3]"
 			shift;shift;shift
-      			;;
+      ;;
 		shh_post)
 			;&
 		shh_newFilter)
-      			is_array "$3"
+      is_array "$3"
 			swirl_curl $1 "[\"$2\", $params]"
 			shift;shift;shift
 			;;
@@ -221,7 +222,7 @@ while [ "$1" != "" ]; do
 			;;
 		*)
 			printHelpAndExit 0
-		    	;;
+		  ;;
 	esac
 done
 
