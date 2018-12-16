@@ -25,4 +25,15 @@ else
   . ~/.bashrc
 fi
 
+# ZSH Support
+if [ -e ~/.zshrc ]; then # "File exists"
+  if grep -q "source ~/.bash_completion" ~/.zshrc
+  then # If found
+    echo "### Zwirl completions are up to date. ###"
+  else
+    printf "autoload bashcompinit\nbashcompinit\nsource ~/.bash_completion" >> ~/.zshrc
+    echo "### Zwirl completions installed. ###"
+  fi
+fi 
+
 exit 0
