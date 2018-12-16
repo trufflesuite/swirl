@@ -1,5 +1,5 @@
-const { get } = require("./request");
+const { call } = require("./request");
 
 (async () => {
-  console.log(await get());
+  console.log(await call());
 })();
