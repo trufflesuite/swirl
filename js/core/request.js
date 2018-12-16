@@ -39,5 +39,5 @@ const rpc = (method, params) => JSON.stringify({
   id: 1337,
   jsonrpc: "2.0",
   method: method,
-  params: [...params]
+  params: [params ? JSON.parse(...params) : ""]
 });

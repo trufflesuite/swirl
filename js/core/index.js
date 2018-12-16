@@ -1,5 +1,6 @@
 const { call } = require("./request");
 
 (async () => {
-  console.log(await call());
+  const [ method, ...params ] = process.argv.slice(2);
+  console.log(await call(method, ...params));
 })();
