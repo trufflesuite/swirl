@@ -80,7 +80,7 @@ while [ "$1" != "" ]; do
 			;&
 		net_listening)
 			;&
-		web3_clientVersin)
+		web3_clientVersion)
 			;&
 		eth_getCompilers)
 			;&
