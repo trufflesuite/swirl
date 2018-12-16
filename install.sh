@@ -2,7 +2,7 @@
 
 mkdir -p ~/bin
 touch ~/bin/swirl
-pip install -r requirements-dev.txt
+#pip install -r requirements-dev.txt
 success='### Swirl is up-to-date! ###'
 install='### Swirl updated/installed! ###'
 cmp --silent ~/bin/swirl swirl && echo $success || (cp swirl ~/bin && chmod +x ~/bin/swirl && echo $install)
@@ -22,7 +22,7 @@ else
     cat swirl_completion >> ~/.bash_completion && sed -i -e "s/__SWIRL_MENU_LIST__/$menu_list/g" ~/.bash_completion
     echo "### Completions Installed. ###"
   fi
-  . ~/.bashrc
+  [ -r ~/.bashrc ] && . ~/.bashrc
 fi
 
 # ZSH Support

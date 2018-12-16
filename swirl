@@ -19,7 +19,7 @@ function printHelpAndExit () {
 function swirl_curl() {
 	local host="$protocol://$address:$port"
 	printf "curl -H \"Content-Type: application/json\" -X POST --data '{\"id\":1337,\"jsonrpc\":\"2.0\",\"method\":\"$1\",\"params\":$2}' $host\n\n"
-	curl -s -H "Content-Type: application/json" -X POST --data "{\"id\":1337,\"jsonrpc\":\"2.0\",\"method\":\"$1\",\"params\":$2}" $host | python -m json.tool | pygmentize -l javascript
+	curl -s -H "Content-Type: application/json" -X POST --data "{\"id\":1337,\"jsonrpc\":\"2.0\",\"method\":\"$1\",\"params\":$2}" $host | python -m json.tool
 	echo ""
 }
 
