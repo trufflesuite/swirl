@@ -64,159 +64,61 @@ while [ "$1" != "" ]; do
 			done
 			echo "$protocol://$address:$port"
 			;;
-		eth_accounts)
+		eth_accounts | eth_hashrate | eth_mining | eth_coinbase | eth_syncing | eth_protocolVersion)
 			;&
-		eth_hashrate)
+		eth_gasPrice | eth_blockNumber | eth_getCompilers | eth_newBlockFilter | eth_getWork)
 			;&
-		eth_mining)
+		evm_snapshot | net_listening | net_peerCount | net_version)
 			;&
-		eth_coinbase)
-			;&
-		eth_syncing)
-			;&
-		eth_protocolVersion)
-			;&
-		net_peerCount)
-			;&
-		net_listening)
-			;&
-		web3_clientVersin)
-			;&
-		eth_getCompilers)
-			;&
-		eth_newBlockFilter)
-			;&
-		eth_getWork)
-			;&
-		shh_version)
-			;&
-		shh_newIdentity)
-			;&
-		shh_newGroup)
-			;&
-		net_version)
-			;&
-		eth_gasPrice)
-			;&
-		eth_blockNumber)
-			;&
-		evm_snapshot)
+		shh_version | shh_newIdentity | shh_newGroup | web3_clientVersion)
 			swirl_curl $1 "[]"
 			shift;
 			;;
+		eth_getBalance | eth_getStorageAt | eth_getBlockTransactionCountByHash | eth_getBlockTransactionCountByNumber)
+			;&
+		eth_getUncleCountByBlockHash | eth_getUncleCountByBlockNumber | eth_sendRawTransaction | eth_getTransactionByHash)
+			;&
+		eth_getTransactionReceipt | eth_compileLLL | eth_compileSolidity | eth_compileSerpent | eth_newPendingTransactionFilter)
+			;&
+		eth_uninstallFilter | eth_getFilterChanges | eth_subscribe | eth_unsubscribe)
+			;&
+		evm_mine | evm_revert | evm_increaseTime )
+			;&
+		shh_getFilterChanges | eth_getFilterLogs | shh_hasIdentity | shh_addToGroup | shh_uninstallFilter | shh_getMessages)
+			;&
 		web3_sha3)
-			;&
-		eth_getBalance)
-			;&
-		eth_getStorageAt)
-			;&
-		eth_getBlockTransactionCountByHash)
-			;&
-		eth_getBlockTransactionCountByNumber)
-			;&
-		eth_getUncleCountByBlockHash)
-			;&
-		eth_getUncleCountByBlockNumber)
-			;&
-		eth_sendRawTransaction)
-			;&
-		eth_getTransactionByHash)
-			;&
-		eth_getTransactionReceipt)
-			;&
-		eth_compileLLL)
-			;&
-		eth_compileSolidity)
-			;&
-		eth_compileSerpent)
-			;&
-		eth_newPendingTransactionFilter)
-			;&
-		eth_uninstallFilter)
-			;&
-		eth_getFilterChanges)
-			;&
-		shh_getFilterChanges)
-			;&
-		eth_getFilterLogs)
-			;&
-		shh_hasIdentity)
-			;&
-		shh_addToGroup)
-			;&
-		shh_uninstallFilter)
-			;&
-		shh_getMessages)
-			;&
-		eth_subscribe)
-			;&
-		eth_unsubscribe)
-			;&
-		evm_mine)
-			;&
-		evm_revert)
-			;&
-		evm_increaseTime)
 			swirl_curl $1 "[\"$2\"]"
 			shift;shift
 			;;
-		eth_newFilter)
-			;&
-		eth_getLogs)
-			;&
-		eth_estimateGas)
+		eth_newFilter | eth_getLogs | eth_estimateGas)
 			swirl_curl $1 "$2"
 			shift;shift
 			;;
-		eth_call)
-			;&
-		eth_sendTransaction)
+		eth_call | eth_sendTransaction)
 			is_array "$2"
 			swirl_curl $1 "$params"
 			shift;shift
 			;;
-		eth_getBlockByHash)
-			;&
-		eth_getBlockByNumber)
+		eth_getBlockByHash | eth_getBlockByNumber)
 			swirl_curl $1 "[\"$2\", $3]"
 			shift;shift;shift
       ;;
-		shh_post)
-			;&
-		shh_newFilter)
+		shh_post | shh_newFilter)
       is_array "$3"
 			swirl_curl $1 "[\"$2\", $params]"
 			shift;shift;shift
 			;;
-		eth_getUncleByBlockHashAndIndex)
+		eth_getUncleByBlockHashAndIndex |	eth_getUncleByBlockNumberAndIndex |	eth_getTransactionByBlockHashAndIndex)
 			;&
-		eth_getUncleByBlockNumberAndIndex)
+		eth_getTransactionByBlockNumberAndIndex | eth_getCode | eth_getTransactionCount | eth_submitHashrate | eth_sign)
 			;&
-		eth_getTransactionByBlockHashAndIndex)
-			;&
-		eth_getTransactionByBlockNumberAndIndex)
-			;&
-		db_getString)
-			;&
-		db_getHex)
-			;&
-		eth_getCode)
-			;&
-		eth_getTransactionCount)
-			;&
-		eth_submitHashrate)
-			;&
-		eth_sign)
+		db_getString | db_getHex)
 			swirl_curl $1 "[\"$2\", \"$3\"]"
 			shift;shift;shift
 			;;
-		eth_submitWork)
+		eth_submitWork | eth_getStorageAt)
 			;&
-		db_putString)
-			;&
-		db_putHex)
-			;&
-		eth_getStorageAt)
+		db_putString | db_putHex)
 			swirl_curl $1 "[\"$2\", \"$3\", \"$4\"]"
 			shift;shift;shift;shift
 			;;
