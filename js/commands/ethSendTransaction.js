@@ -1,7 +1,6 @@
 const { run } = require('neodoc');
-const command = "jswirl ethSendTransaction";
 const swirl = require("../core");
-// const command = "jswirl (ethSendTransaction | eth_sendTransaction)";
+const command = "jswirl (ethSendTransaction | eth_sendTransaction)";
 module.exports = async (argv) => {
   const args = run(`
   usage: 
@@ -21,5 +20,5 @@ module.exports = async (argv) => {
       return acc;
     }, {});
   }
-  console.log(await swirl("eth_sendTransaction", result), null, 2);
+  console.log(await swirl("eth_sendTransaction", result));
 };

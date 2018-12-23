@@ -13,7 +13,7 @@ Usage:
 const args = neodoc.run(HELPTEXT, { optionsFirst: true, smartOptions: true });
 
 
-if (/^eth_?SendTransaction/i.test(args["<command>"])) {
+if (/^eth_?(s|S)endTransaction/.test(args["<command>"])) {
     require(`./commands/ethSendTransaction.js`)([args['<command>']].concat(args['<args>']));
 } else {
   console.log(HELPTEXT);
