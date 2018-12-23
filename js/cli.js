@@ -6,18 +6,15 @@ const DEFAULT = `[-p --ssl --host=HOST]`;
 const HELPTEXT = `
 Usage: 
     jswirl [-h | --help] [-v | --version]
-    jswirl eth_hashrate ${DEFAULT}
-    jswirl eth_accounts ${DEFAULT} 
-    jswirl eth_getBalance ${DEFAULT} (HASH | --hash=HASH)
-    jswirl eth_sendTransaction ${DEFAULT} (OBJECT | --to=TO --from=FROM --value=VALUE [--gas=GAS] [--gasPrice==GASPRICE] [--data=DATA] [--nonce=NONCE])
+    jswirl [<command> [<args>]...]
  
 `;
 
 const args = neodoc.run(HELPTEXT, { optionsFirst: true, smartOptions: true });
 
-// (async () => {
-//   const [ method, ...params ] = process.argv.slice(2);
-//   console.log(await swirl(method, ...params));
-// })();
 
-console.log(args);
+if (/^eth_?SendTransaction/i.test(args["<command>"])) {
+    require(`./commands/ethSendTransaction.js`)([args['<command>']].concat(args['<args>']));
+} else {
+  console.log(HELPTEXT);
+}
