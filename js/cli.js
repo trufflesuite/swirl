@@ -2,6 +2,7 @@
 
 const { run } = require('neodoc');
 const DEFAULT = `[-p --ssl --host=HOST]`;
+const commands = require("./utils/commands");
 const HELPTEXT = `
 Usage: 
     jswirl [-h | --help] [-v | --version]
@@ -9,28 +10,33 @@ Usage:
  
 `;
 
-const args = run(HELPTEXT, { optionsFirst: true, smartOptions: true });
+const [ test, call ] = prime();
+const methods = Object.keys(commands);
+let command = null;
 
-if(/^eth/){
-    const [ test, call ] = prime(args, "eth");
-    if (test(/^(_s|S)endTransaction/)) {
-        call(`ethSendTransaction`);
-    } else if (test(/^(_a|A)ccounts/)) {
-        call(`ethAccounts`);
+for (let i = 0; i < methods.length; i++){
+    if (test(methods[i])) {
+        command = commands[methods[i]];
     }
-} else {
-  console.log(HELPTEXT);
 }
 
-function prime(args, type){
-    const test = makeTest(args["<command>"].substring(type.length));
+if(command){
+    call(command);
+} else {
+    console.log(HELPTEXT);
+}
+
+function prime(){
+    const args = run(HELPTEXT, { optionsFirst: true, smartOptions: true });
+    const test = makeTest(args["<command>"]);
     const call = makeCall([args['<command>']].concat(args['<args>']));
     return [test, call]
 }
 
 function makeTest(command){
     return function reg(ex) {
-        return ex.test(command);
+        const temp = (new RegExp(ex)).test(command);
+        return temp
     }
 }
 
