@@ -7,41 +7,17 @@ const HELPTEXT = `
 Usage: 
     jswirl [-h | --help] [-v | --version]
     jswirl [<command> [<args>]...] ${DEFAULT}
- 
+
+Commands:
+    ethAccounts             Get accounts information
+    ethSendTransaction      Send simple transaction
 `;
 
-const [ test, call ] = prime();
-const methods = Object.keys(commands);
-let command = null;
+const args = run(HELPTEXT, { optionsFirst: true, smartOptions: true });
+const subcommand = commands(args);
 
-for (let i = 0; i < methods.length; i++){
-    if (test(methods[i])) {
-        command = commands[methods[i]];
-    }
-}
-
-if(command){
-    call(command);
+if(subcommand) {
+    subcommand();
 } else {
     console.log(HELPTEXT);
-}
-
-function prime(){
-    const args = run(HELPTEXT, { optionsFirst: true, smartOptions: true });
-    const test = makeTest(args["<command>"]);
-    const call = makeCall([args['<command>']].concat(args['<args>']));
-    return [test, call]
-}
-
-function makeTest(command){
-    return function reg(ex) {
-        const temp = (new RegExp(ex)).test(command);
-        return temp
-    }
-}
-
-function makeCall(context){
-    return function call(command) {
-        require(`./commands/${command}.js`)(context);
-    }
 }
