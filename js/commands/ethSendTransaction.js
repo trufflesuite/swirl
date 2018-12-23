@@ -1,6 +1,8 @@
 const { run } = require('neodoc');
 const swirl = require("../core");
 const command = "jswirl (ethSendTransaction | eth_sendTransaction)";
+const { rich } = require("../utils/helper");
+
 module.exports = async (argv) => {
   const args = run(`
   usage: 
@@ -8,17 +10,6 @@ module.exports = async (argv) => {
     ${command} (TXOBJECT | (--to=TO --from=FROM --value=VALUE) [--gas=GAS --gasPrice=GASPRICE --data=DATA --nonce=NONCE])
   `, { argv: argv, smartOptions: true });
   console.log(args);
-  let result;
-  if( args.TXOBJECT ){
-    result = JSON.parse(args.TXOBJECT);
-  } else {
-    result = Object.keys(args).reduce((acc, curr) => {
-      if (curr.includes("--")){
-        const newKey = curr.substring(2);
-        acc[newKey] = args[curr];
-      }
-      return acc;
-    }, {});
-  }
+  let result = rich(args);
   console.log(await swirl("eth_sendTransaction", result));
 };
