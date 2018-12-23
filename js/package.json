@@ -1,0 +1,17 @@
+{
+  "name": "jswirl",
+  "version": "1.0.0",
+  "description": "Ethereum's Cliff Clavin",
+  "main": "cli.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "neodoc": "^2.0.2"
+  },
+  "bin": {
+    "jswirl": "./cli.js"
+  }
+}
