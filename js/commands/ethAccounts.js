@@ -1,5 +1,5 @@
 const { run } = require('neodoc');
-const command = "jswirl ethAccounts";
+const command = "jswirl (ethAccounts | eth_accounts)";
 module.exports = (argv) => {
   const args = run(`
   usage: 
