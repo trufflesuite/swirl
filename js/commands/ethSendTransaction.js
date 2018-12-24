@@ -6,7 +6,8 @@ const { rich } = require('../utils/helper')
 const docString = `
 usage:
   ${command} [-h | --help] [--version]
-  ${command} (TXOBJECT | (--to=TO --from=FROM --value=VALUE) [--gas=GAS --gasPrice=GASPRICE --data=DATA --nonce=NONCE]) [--dry-run]
+  ${command} TXOBJECT  [--dry-run]
+  ${command} --to=TO --from=FROM --value=VALUE [--gas=GAS --gasPrice=GASPRICE --data=DATA --nonce=NONCE] [--dry-run]
 `
 module.exports = async argv => {
   const args = run(docString, { argv: argv, smartOptions: true })
