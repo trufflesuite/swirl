@@ -11,7 +11,6 @@ module.exports = function(options) {
       });
 
       resp.on('end', () => resolve(JSON.parse(data)));
-
     }).on("error", (err) => {
       reject(err);
     });

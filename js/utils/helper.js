@@ -31,7 +31,14 @@ module.exports = {
   },
 
   positional(args, commands){
-    return commands;
+    return commands.reduce((acc, curr) => {
+      if(curr.includes("=")){
+        acc.push(curr.split("=")[1]);
+      } else if (!curr.startsWith("--")){
+        acc.push(curr);
+      }
+      return acc;
+    }, [])
   },
 
   rich(args){

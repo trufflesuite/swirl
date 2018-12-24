@@ -5,7 +5,8 @@ const swirl = require("../core");
 const docString = `
 usage: 
   ${command} [-h | --help] [--version]
-  ${command} --hash HASH --include INCLUDETX [options]
+  ${command} HASH INCLUDETXS [options]
+  ${command} --hash=HASH --tx=BOOL [options]
 
 ${OPTIONS}
 `;
