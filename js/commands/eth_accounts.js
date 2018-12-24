@@ -9,13 +9,12 @@ usage:
 
 ${OPTIONS}
 `;
-module.exports = (method, argv) => async () => {
-  const options = run(method, docString, argv);
-  console.log(options);
-  if (argv.includes("--dry-run")) {
+module.exports = (argv) => async () => {
+  const options = run(docString, argv);
+  if (options.dryRun) {
     console.log('dry run...')
-    console.log(argv)
+    console.log(options)
     return
   }
-  console.log(await swirl(options, method));
+  console.log(await swirl(options));
 }

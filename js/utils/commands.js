@@ -1,10 +1,10 @@
 // Mapping input to modules
 // TODO: examples for how to use this - documentation
 const commands = [
-  [/^eth(_s|S)endTransaction/, "ethSendTransaction", "eth_sendTransaction"],
-  [/^eth(_a|A)ccounts/, "ethAccounts", "eth_accounts"],
-  [/^eth(_g|G)etBlockByNumber/, "ethGetBlockByNumber", "eth_getBlockByNumber"],
-  [/^eth(_g|G)etBlockByHash/, "ethGetBlockByHash", "eth_getBlockByHash"],
+  [/^eth(_s|S)endTransaction/, "eth_sendTransaction"],
+  [/^eth(_a|A)ccounts/, "eth_accounts"],
+  [/^eth(_g|G)etBlockByNumber/, "eth_getBlockByNumber"],
+  [/^eth(_g|G)etBlockByHash/, "eth_getBlockByHash"],
 ];
 
 /**
@@ -19,9 +19,10 @@ const matchSubCommand = dic => {
   const cmd = dic['<command>']
   const entryFound = commands.find(([rex]) => rex.test(cmd))
   if (entryFound) {
-    const [,subcommand, rpcmethod] = entryFound;
-    const params = [cmd].concat(dic['<args>'])
-    return require(`../commands/${subcommand}`)(rpcmethod, params);
+    const [, subcommand] = entryFound;
+    const params = [cmd].concat(dic['<args>']);
+    params[0] = subcommand;
+    return require(`../commands/${subcommand}.js`)(params);
   }
   return undefined
 }
