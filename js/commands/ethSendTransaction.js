@@ -1,24 +1,25 @@
-const { run } = require('neodoc')
-const swirl = require('../core')
-const command = 'jswirl (ethSendTransaction | eth_sendTransaction)'
-const { rich } = require('../utils/helper')
-
+const command = "jswirl (ethSendTransaction | eth_sendTransaction)";
+const { rich, run, missing } = require("../utils/helper");
+const { OPTIONS } = require("../utils/common");
+const swirl = require("../core");
 const docString = `
-usage:
+usage: 
   ${command} [-h | --help] [--version]
-  ${command} (TXOBJECT | (--to=TO --from=FROM --value=VALUE) [--gas=GAS --gasPrice=GASPRICE --data=DATA --nonce=NONCE]) [--dry-run]
-`
-module.exports = async argv => {
-  const args = run(docString, { argv: argv, smartOptions: true })
+  ${command} (TXOBJECT | (--to=TO --from=FROM --value=VALUE) [--gas=GAS --gasPrice=GASPRICE --data=DATA --nonce=NONCE]) [options]
 
-  if (Object.keys(args).length < 2) {
+${OPTIONS}
+`;
+
+module.exports = (method, argv) => async () => {
+  const options = run(method, docString, argv, rich);
+  const params = options.params[0];
+  if(missing(params, "to", "from", "value")){
     console.log(docString)
+    return;
+  }
+  if (argv.includes('--dry-run')) {
+    console.log(argv)
     return
   }
-  let result = rich(args)
-  if ('--dry-run' in args) {
-    console.log(args)
-    return
-  }
-  console.log(await swirl('eth_sendTransaction', result))
-}
+  console.log(await swirl(options, method));
+};

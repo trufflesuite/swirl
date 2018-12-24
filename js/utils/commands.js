@@ -1,10 +1,11 @@
 // Mapping input to modules
 // TODO: examples for how to use this - documentation
 const commands = [
-  [/^eth(_s|S)endTransaction/, require('../commands/ethSendTransaction')],
-  [/^eth(_a|A)ccounts/, require('../commands/ethAccounts')],
-  [/^eth(_g|G)etBlockBy/, require('../commands/ethGetBlockBy')]
-]
+  [/^eth(_s|S)endTransaction/, "ethSendTransaction", "eth_sendTransaction"],
+  [/^eth(_a|A)ccounts/, "ethAccounts", "eth_accounts"],
+  [/^eth(_g|G)etBlockByNumber/, "ethGetBlockByNumber", "eth_getBlockByNumber"],
+  [/^eth(_g|G)etBlockByHash/, "ethGetBlockByHash", "eth_getBlockByHash"],
+];
 
 /**
  * Determines if an argument matches a known command
@@ -18,9 +19,9 @@ const matchSubCommand = dic => {
   const cmd = dic['<command>']
   const entryFound = commands.find(([rex]) => rex.test(cmd))
   if (entryFound) {
-    subcommand = entryFound[1]
+    const [,subcommand, rpcmethod] = entryFound;
     const params = [cmd].concat(dic['<args>'])
-    return () => subcommand(params)
+    return require(`../commands/${subcommand}`)(rpcmethod, params);
   }
   return undefined
 }

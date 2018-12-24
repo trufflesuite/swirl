@@ -8,7 +8,9 @@ Usage:
     jswirl [<command> [<args>]...]
 
 Commands:
-    ethAccounts             Get accounts information
+    ethAccounts             Request accounts information
+    ethGetBlockByHash       Request block by Hash
+    ethGetBlockByNumber     Request block by number
     ethSendTransaction      Send simple transaction
     ethGetBlockBy           Get a block
 `

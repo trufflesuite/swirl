@@ -1,3 +1,3 @@
-const { call } = require("./request");
+const swirl = require("./request");
 
-module.exports = call;
+module.exports = swirl;

@@ -1,19 +1,21 @@
-const { run } = require('neodoc')
-const command = 'jswirl (ethAccounts | eth_accounts)'
+const command = "jswirl (ethAccounts | eth_accounts)";
+const { OPTIONS } = require("../utils/common");
+const { run } = require("../utils/helper");
+const swirl = require("../core");
 const docString = `
-usage:
-  ${command} [-h | --help] [-v | --version]
+usage: 
+  ${command} [-h | --help] [--version]
   ${command} [options]
 
-Options:
-  -p, --port PORT Change port [default: 8545]
-  --dry-run Perform dry run
-`
-module.exports = argv => {
-  const args = run(docString, { argv: argv, smartOptions: true })
-  if ('--dry-run' in args) {
+${OPTIONS}
+`;
+module.exports = (method, argv) => async () => {
+  const options = run(method, docString, argv);
+  console.log(options);
+  if (argv.includes("--dry-run")) {
     console.log('dry run...')
-    console.log(args)
+    console.log(argv)
     return
   }
+  console.log(await swirl(options, method));
 }
