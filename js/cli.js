@@ -1,23 +1,23 @@
 #!/usr/bin/env node
 
-const { run } = require('neodoc');
-const DEFAULT = `[-p --ssl --host=HOST]`;
-const commands = require("./utils/commands");
-const HELPTEXT = `
-Usage: 
+const { run } = require('neodoc')
+const getSubCommand = require('./utils/commands')
+const docString = `
+Usage:
     jswirl [-h | --help] [-v | --version]
-    jswirl [<command> [<args>]...] ${DEFAULT}
+    jswirl [<command> [<args>]...]
 
 Commands:
     ethAccounts             Get accounts information
     ethSendTransaction      Send simple transaction
-`;
+    ethGetBlockBy           Get a block
+`
 
-const args = run(HELPTEXT, { optionsFirst: true, smartOptions: true });
-const subcommand = commands(args);
+const args = run(docString, { optionsFirst: true, smartOptions: true })
+const subcommand = getSubCommand(args)
 
-if(subcommand) {
-    subcommand();
+if (subcommand) {
+  subcommand(args)
 } else {
-    console.log(HELPTEXT);
+  console.log(docString)
 }
