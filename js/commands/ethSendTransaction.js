@@ -5,7 +5,7 @@ const { rich } = require('../utils/helper')
 
 const docString = `
 usage:
-  ${command} [-h | --help] [--version]
+  ${command} [-h | --help]
   ${command} TXOBJECT  [--dry-run]
   ${command} --to=TO --from=FROM --value=VALUE [--gas=GAS --gasPrice=GASPRICE --data=DATA --nonce=NONCE] [--dry-run]
 `

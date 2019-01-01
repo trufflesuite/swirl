@@ -2,12 +2,12 @@ const { run } = require('neodoc')
 const command = 'jswirl (ethAccounts | eth_accounts)'
 const docString = `
 usage:
-  ${command} [-h | --help] [-v | --version]
+  ${command} [-h | --help]
   ${command} [options]
 
 Options:
-  -p, --port PORT Change port [default: 8545]
-  --dry-run Perform dry run
+  -p, --port PORT   Change port [default: 8545]
+  --dry-run         Perform dry run
 `
 module.exports = argv => {
   const args = run(docString, { argv: argv, smartOptions: true })
@@ -16,4 +16,6 @@ module.exports = argv => {
     console.log(args)
     return
   }
+
+  console.log(JSON.stringify(args))
 }
