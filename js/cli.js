@@ -4,7 +4,7 @@ const { run } = require('neodoc')
 const getSubCommand = require('./utils/commands')
 const docString = `
 Usage:
-    jswirl [-h | --help] [-v | --version]
+    jswirl [-h | --help] [--version]
     jswirl [<command> [<args>]...]
 
 Commands:
