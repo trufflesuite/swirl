@@ -1,0 +1,21 @@
+{
+  "name": "swirl-core",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "author": "Nicholas J. Paterno @nicholasjpaterno",
+  "repository": "trufflesuite/swirl",
+  "homepage": "https://github.com/trufflesuite/swirl",
+  "bugs": "https://github.com/trufflesuite/swirl/issues",
+  "scripts": {
+    "start": "node ./build/index.js",
+    "build": "tsc"
+  },
+  "publishConfig": {
+    "access" : "public"
+  },
+  "devDependencies": {
+    "typescript": "^3.7.2"
+  },
+  "dependencies": {}
+}

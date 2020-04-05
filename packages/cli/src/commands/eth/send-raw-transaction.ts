@@ -1,6 +1,6 @@
-import {Command, flags} from '@oclif/command'
+import {Command, flags} from '@oclif/command';
 
-export default class EthSendRawTransaction extends Command {
+export default class SendRawTransaction extends Command {
   static description = 'describe the command here'
 
   static flags = {
@@ -14,12 +14,12 @@ export default class EthSendRawTransaction extends Command {
   static args = [{name: 'file'}]
 
   async run() {
-    const {args, flags} = this.parse(EthSendRawTransaction)
+    const {args, flags} = this.parse(SendRawTransaction);
 
-    const name = flags.name || 'world'
-    this.log(`hello ${name} from /home/cashlion/Play/swirl/src/commands/eth/sendRawTransaction.ts`)
+    const name = flags.name || 'world';
+    this.log(`hello ${name} from /home/cashlion/Play/swirl/src/commands/eth/sendRawTransaction.ts`);
     if (args.file && flags.force) {
-      this.log(`you input --force and --file: ${args.file}`)
+      this.log(`you input --force and --file: ${args.file}`);
     }
   }
 }

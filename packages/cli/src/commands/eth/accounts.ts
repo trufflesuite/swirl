@@ -1,7 +1,7 @@
 import {Command, flags} from '@oclif/command';
 import RPC from '../../utils/rpc';
 
-export default class EthAccounts extends Command {
+export default class Accounts extends Command {
   static description = `Returns a list of addresses owned by client.
 
 Parameters: none
@@ -19,7 +19,7 @@ Array of DATA, 20 Bytes - addresses owned by the client.
 
   static flags = {
     help: flags.help({char: 'h'}),
-  }
+  };
 
   static aliases = ['eth_accounts', 'ethAccounts'];
 

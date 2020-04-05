@@ -1,6 +1,6 @@
 import {Command, flags} from '@oclif/command';
 
-export default class EthSendTransaction extends Command {
+export default class SendTransaction extends Command {
   static description = 'describe the command here'
 
   static flags = {
@@ -14,7 +14,7 @@ export default class EthSendTransaction extends Command {
   static args = [{name: 'file'}]
 
   async run() {
-    const {args, flags} = this.parse(EthSendTransaction);
+    const {args, flags} = this.parse(SendTransaction);
 
     const name = flags.name || 'world';
     this.log(`hello ${name} from /home/cashlion/Play/swirl/src/commands/eth/sendTransaction.ts`);
