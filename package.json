@@ -10,7 +10,10 @@
   "dependencies": {
     "@oclif/command": "^1",
     "@oclif/config": "^1",
+    "@oclif/plugin-autocomplete": "^0.1.5",
     "@oclif/plugin-help": "^2",
+    "@oclif/plugin-plugins": "^1.7.9",
+    "got": "^10.7.0",
     "tslib": "^1"
   },
   "devDependencies": {
@@ -48,8 +51,15 @@
     "commands": "./lib/commands",
     "bin": "swirl",
     "plugins": [
-      "@oclif/plugin-help"
-    ]
+      "@oclif/plugin-help",
+      "@oclif/plugin-plugins",
+      "@oclif/plugin-autocomplete"
+    ],
+    "topics": {
+      "eth": {
+        "description": "eth cool"
+      }
+    }
   },
   "repository": "trufflesuite/swirl",
   "scripts": {
