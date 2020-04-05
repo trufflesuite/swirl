@@ -1,59 +1,70 @@
-# swirl
-Make curl easier with ethereum bash completions.
+swirl
+=====
 
-## Usage
-Enter any valid JSON RPC method and parameters
+JSONRPC utility
 
-## Options
--a newAddress
--p port
--P protocol
+[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
+[![Version](https://img.shields.io/npm/v/swirl.svg)](https://npmjs.org/package/swirl)
+[![Downloads/week](https://img.shields.io/npm/dw/swirl.svg)](https://npmjs.org/package/swirl)
+[![License](https://img.shields.io/npm/l/swirl.svg)](https://github.com/trufflesuite/swirl/blob/master/package.json)
 
-## Full Example
-```bash
-swirl -a localhost -p 7545 -P https eth_getTransactionByHash 0x0...
-curl -H "Content-Type: application/json" -X POST --data '{"id":120,"jsonrpc":"2.0","method":"eth_getTransactionByHash","params":"0x0.."}' https://localhost:7545
+<!-- toc -->
+* [Usage](#usage)
+* [Commands](#commands)
+<!-- tocstop -->
+# Usage
+<!-- usage -->
+```sh-session
+$ npm install -g swirl
+$ swirl COMMAND
+running command...
+$ swirl (-v|--version|version)
+swirl/0.0.0 linux-x64 node-v12.16.1
+$ swirl --help [COMMAND]
+USAGE
+  $ swirl COMMAND
+...
+```
+<!-- usagestop -->
+# Commands
+<!-- commands -->
+* [`swirl hello [FILE]`](#swirl-hello-file)
+* [`swirl help [COMMAND]`](#swirl-help-command)
+
+## `swirl hello [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ swirl hello [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+
+EXAMPLE
+  $ swirl hello
+  hello world from ./src/hello.ts!
 ```
 
-### Default: http://localhost:8545
-```bash
-swirl eth_getTransactionByHash 0x0...
-curl -H "Content-Type: application/json" -X POST --data '{"id":120,"jsonrpc":"2.0","method":"eth_getTransactionByHash","params":"0x0.."}' http://localhost:8545
+_See code: [src/commands/hello.ts](https://github.com/trufflesuite/swirl/blob/v0.0.0/src/commands/hello.ts)_
+
+## `swirl help [COMMAND]`
+
+display help for swirl
+
+```
+USAGE
+  $ swirl help [COMMAND]
+
+ARGUMENTS
+  COMMAND  command to show help for
+
+OPTIONS
+  --all  see all commands in CLI
 ```
 
-```bash
-swirl eth_getBlockByNumber 0xb true
-curl -H "Content-Type: application/json" -X POST --data '{"id":120,"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["0xb", true]}' http://localhost:8545
-```
-
-## Rich Parameters:
-```bash
-swirl eth_sendTransaction "{'value': '0x10000000', 'gas': '0xf4240', 'from': '0x...' etc.. }"
-curl -H "Content-Type: application/json" -X POST --data '{"id":120,"jsonrpc":"2.0","method":"eth_sendTransaction","params":[{"value": "0x10000000", "gas": "0xf4240", "from": "0x..." etc...}]}' http://localhost:8545
-```
-
-## Run consecutive calls:
-```bash
-swirl eth_getTransactionByHash 0x0...  eth_sendTransaction '{"value": "0x10000000", "as": "0xf4240", "from" "0x..." etc.. }'
-```
-
-## Installation:
-```bash
-chmod +x install.sh
-./install.sh
-```
-
-### Manual installation
-```bash
-mkdir -p ~/bin
-cp swirl ~/bin && chmod +x ~/bin/swirl
-```
-
-### Manual Install Bash Completion
-```bash
-touch ~/.bash_completion && cat swirl_completion >> ~/.bash_completion && source ~/.bashrc
-```
-
-
-#### TODO
-zsh support
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.3/src/commands/help.ts)_
+<!-- commandsstop -->
