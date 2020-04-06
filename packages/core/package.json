@@ -1,5 +1,5 @@
 {
-  "name": "swirl-core",
+  "name": "@swirl/core",
   "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -12,10 +12,14 @@
     "build": "tsc"
   },
   "publishConfig": {
-    "access" : "public"
+    "access": "public"
   },
   "devDependencies": {
     "typescript": "^3.7.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@types/ws": "^7.2.3",
+    "got": "^10.7.0",
+    "ws": "^7.2.3"
+  }
 }

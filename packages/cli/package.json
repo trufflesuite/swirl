@@ -17,7 +17,6 @@
     "@oclif/plugin-help": "^2",
     "@oclif/plugin-plugins": "^1.7.9",
     "@types/inquirer": "^6.5.0",
-    "got": "^10.7.0",
     "inquirer": "^7.1.0",
     "tslib": "^1"
   },

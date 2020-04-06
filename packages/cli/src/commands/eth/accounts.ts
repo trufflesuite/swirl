@@ -1,5 +1,5 @@
 import {Command, flags} from '@oclif/command';
-import RPC from '../../utils/rpc';
+import RPC from 'RPC';
 
 export default class Accounts extends Command {
   static description = `Returns a list of addresses owned by client.
