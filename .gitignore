@@ -2,7 +2,8 @@
 *-error.log
 /.nyc_output
 /dist
-/lib
+lib
 /package-lock.json
 /tmp
 node_modules
+tsconfig.tsbuildinfo
