@@ -1,2 +1,2 @@
 # swirl
-Make curl easier with ethereum bash completions.
+Make JSONRPC calls easier with swirl
