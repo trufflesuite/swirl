@@ -1,6 +1,6 @@
 const quantifiers = new Set(['latest', 'earliest', 'pending']);
 
-export function hex(value: string | number) {
+export function hex(value: string  | number) {
   if (typeof value === 'string') {
     return value.startsWith('0x') ? value : `0x${value}`;
   }
