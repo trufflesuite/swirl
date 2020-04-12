@@ -4,7 +4,7 @@ export interface BaseRpcResponse {
 }
 
 export interface RPCSuccess extends BaseRpcResponse {
-  result: string;
+  result: string | boolean;
 }
 
 export interface RPCError extends BaseRpcResponse {
@@ -16,8 +16,8 @@ export type RPCResponse = RPCSuccess | RPCError;
 export type RPCTAG = 'latest' | 'earliest' | 'pending';
 
 export interface Filter {
-  fromBlock: number|RPCTAG; // QUANTITY|TAG - (optional, default: "latest") Integer block number, or "latest" for the last mined block or "pending", "earliest" for not yet mined transactions.
-  toBlock: number|RPCTAG; // QUANTITY|TAG - (optional, default: "latest") Integer block number, or "latest" for the last mined block or "pending", "earliest" for not yet mined transactions.
+  fromBlock: number | RPCTAG; // QUANTITY|TAG - (optional, default: "latest") Integer block number, or "latest" for the last mined block or "pending", "earliest" for not yet mined transactions.
+  toBlock: number | RPCTAG; // QUANTITY|TAG - (optional, default: "latest") Integer block number, or "latest" for the last mined block or "pending", "earliest" for not yet mined transactions.
   address: string | string[]; // DATA|Array, 20 Bytes - (optional) Contract address or a list of addresses from which logs should originate.
   topics: string[]; // Array of DATA, - (optional) Array of 32 Bytes DATA topics. Topics are order-dependent. Each topic can also be an array of DATA with "or" options.
 }
@@ -38,18 +38,6 @@ export interface Call {
 export interface Transaction extends Call {
   nonce?: number; // QUANTITY - (optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
 }
-
-export const isRPCError = (response: RPCResponse): response is RPCError =>
-  Object.prototype.hasOwnProperty.call(response, 'error');
-
-export const rpc = (method: JSON_RPC_METHOD, params: any[]) => {
-  return JSON.stringify({
-    id: 1337,
-    jsonrpc: '2.0',
-    method,
-    params,
-  });
-};
 
 export type JSON_RPC_METHOD = 'db_getHex' |
 'db_getString' |

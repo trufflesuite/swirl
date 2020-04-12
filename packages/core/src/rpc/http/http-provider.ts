@@ -1,4 +1,5 @@
-import {JSON_RPC_METHOD, RPCResponse, rpc} from '../interfaces/json-rpc';
+import {JSON_RPC_METHOD, RPCResponse} from '../interfaces/json-rpc';
+import {rpc} from '../utils';
 import got from 'got';
 
 export class HTTPProvider {
@@ -21,7 +22,7 @@ export class HTTPProvider {
       }).json() as RPCResponse;
       return data;
     } catch (error) {
-      return error;
+      return error.toString();
     }
   }
 }
