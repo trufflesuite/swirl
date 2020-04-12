@@ -55,9 +55,8 @@ export class WSProvider {
         .once('error', data => {
           reject(data);
           this.cleanUp();
-        });
-
-      this.ws?.send(rpc(method, params));
+        })
+        .send(rpc(method, params));
     });
   }
 }
