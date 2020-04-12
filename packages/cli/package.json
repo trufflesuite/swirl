@@ -19,10 +19,8 @@
     "@swirl/core": "0.0.0",
     "@types/inquirer": "^6.5.0",
     "@types/mkdirp": "^1.0.0",
-    "dotenv": "^8.2.0",
-    "env-paths": "^2.2.0",
+    "conf": "^6.2.4",
     "inquirer": "^7.1.0",
-    "mkdirp": "^1.0.4",
     "tslib": "^1"
   },
   "devDependencies": {
