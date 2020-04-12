@@ -1,5 +1,5 @@
-import RPC from '../rpc';
-import {hex} from '../utils';
+import RPC from '../../../rpc';
+import {hex} from '../../../utils';
 
 export default class DB {
   rpc: RPC;

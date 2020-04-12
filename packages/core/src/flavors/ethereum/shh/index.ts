@@ -1,5 +1,5 @@
-import RPC from '../rpc';
-import {hex} from '../utils';
+import RPC from '../../../rpc';
+import {hex} from '../../../utils';
 
 export default class SHH {
   rpc: RPC;
@@ -20,7 +20,7 @@ export default class SHH {
     return this.rpc.send('shh_getMessages', hex(filterID));
   }
 
-  async shh_hasIdentity(identity: string) {
+  async hasIdentity(identity: string) {
     return this.rpc.send('shh_hasIdentity', hex(identity));
   }
 
@@ -28,11 +28,11 @@ export default class SHH {
   //   return this.rpc.send('shh_newFilter');
   // }
 
-  async shh_newGroup() {
+  async newGroup() {
     return this.rpc.send('shh_newGroup');
   }
 
-  async shh_newIdentity() {
+  async newIdentity() {
     return this.rpc.send('shh_newIdentity');
   }
 
@@ -40,11 +40,11 @@ export default class SHH {
   //   return this.rpc.send('shh_post');
   // }
 
-  async shh_uninstallFilter(filterID: number) {
+  async uninstallFilter(filterID: number) {
     return this.rpc.send('shh_uninstallFilter', hex(filterID));
   }
 
-  async shh_version() {
+  async version() {
     return this.rpc.send('shh_version');
   }
 }

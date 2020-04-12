@@ -1,4 +1,4 @@
-import RPC from '../rpc';
+import RPC from '../../../rpc';
 
 export default class NET {
   rpc: RPC;

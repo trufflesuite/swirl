@@ -1,6 +1,6 @@
-import RPC from '../rpc';
-import {hexOrQuantifier, hex} from '../utils';
-import {RPCTAG, Call, Log, Filter, Transaction} from '../rpc/interfaces/json-rpc';
+import RPC from '../../../rpc';
+import {hexOrQuantifier, hex} from '../../../utils';
+import {RPCTAG, Call, Log, Filter, Transaction} from '../../../rpc/interfaces/json-rpc';
 
 export default class ETH {
   rpc: RPC;
