@@ -1,21 +1,21 @@
-import RPC from '../../../rpc';
+import {Provider} from '../../../rpc';
 
 export default class NET {
-  rpc: RPC;
+  connection: Provider;
 
-  constructor(rpc: RPC) {
-    this.rpc = rpc;
+  constructor(connection: Provider) {
+    this.connection = connection;
   }
 
   async listening() {
-    return this.rpc.send('net_listening');
+    return this.connection.rpc.send('net_listening');
   }
 
   async version() {
-    return this.rpc.send('net_version');
+    return this.connection.rpc.send('net_version');
   }
 
   async peerCount() {
-    return this.rpc.send('net_peerCount');
+    return this.connection.rpc.send('net_peerCount');
   }
 }

@@ -1,17 +1,17 @@
-import RPC from '../../../rpc';
+import {Provider} from '../../../rpc';
 
 export default class WEB3 {
-  rpc: RPC;
+  connection: Provider;
 
-  constructor(rpc: RPC) {
-    this.rpc = rpc;
+  constructor(connection: Provider) {
+    this.connection = connection;
   }
 
   async clientVersion() {
-    return this.rpc.send('web3_clientVersion');
+    return this.connection.rpc.send('web3_clientVersion');
   }
 
   async sha3() {
-    return this.rpc.send('web3_sha3');
+    return this.connection.rpc.send('web3_sha3');
   }
 }

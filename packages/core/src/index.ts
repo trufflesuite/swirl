@@ -1,12 +1,8 @@
-import RPC from './rpc';
-import ETH from './flavors/ethereum/eth';
-import SHH from './flavors/ethereum/shh';
-import WEB3 from './flavors/ethereum/web3';
-import DB from './flavors/ethereum/db';
-import NET from './flavors/ethereum/net';
+import {ETH, SHH, WEB3, DB, NET} from './flavors/ethereum';
+import RPC, {Provider} from './rpc';
 
 export class Swirl {
-  rpc!: RPC;
+  provider!: Provider;
 
   eth!: ETH;
 
@@ -19,15 +15,20 @@ export class Swirl {
   net!: NET;
 
   constructor(host = 'http://0.0.0.0', port = 8545) {
-    this.enableEthereum(new RPC(host, port));
+    this.connection(host, port);
+    this.enableEthereum();
   }
 
-  enableEthereum(rpc: RPC) {
-    this.rpc = rpc;
-    this.shh = new SHH(rpc);
-    this.eth = new ETH(rpc);
-    this.web3 = new WEB3(rpc);
-    this.db = new DB(rpc);
-    this.net = new NET(rpc);
+  connection(host: string, port: number) {
+    this.provider.rpc = new RPC(host, port);
+    return this.provider;
+  }
+
+  enableEthereum() {
+    this.shh = new SHH(this.provider);
+    this.eth = new ETH(this.provider);
+    this.web3 = new WEB3(this.provider);
+    this.db = new DB(this.provider);
+    this.net = new NET(this.provider);
   }
 }

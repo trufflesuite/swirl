@@ -2,6 +2,11 @@
 import {HTTPProvider} from './http/http-provider';
 import {JSON_RPC_METHOD} from './interfaces/json-rpc';
 import {WSProvider} from './ws/ws-provider';
+
+export interface Provider {
+  rpc: RPC;
+}
+
 const provider = (host: string, port: number) => {
   return new (host.startsWith('http') ? HTTPProvider : WSProvider)(host, port);
 };
