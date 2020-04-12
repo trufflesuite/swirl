@@ -1,5 +1,5 @@
 {
-  "name": "swirl",
+  "name": "@swirl/cli",
   "description": "JSONRPC utility",
   "version": "0.0.0",
   "author": "Nicholas J. Paterno @nicholasjpaterno",
@@ -7,7 +7,7 @@
     "swirl": "./bin/run"
   },
   "publishConfig": {
-    "access" : "public"
+    "access": "public"
   },
   "bugs": "https://github.com/trufflesuite/swirl/issues",
   "dependencies": {
@@ -16,8 +16,13 @@
     "@oclif/plugin-autocomplete": "^0.1.5",
     "@oclif/plugin-help": "^2",
     "@oclif/plugin-plugins": "^1.7.9",
+    "@swirl/core": "0.0.0",
     "@types/inquirer": "^6.5.0",
+    "@types/mkdirp": "^1.0.0",
+    "dotenv": "^8.2.0",
+    "env-paths": "^2.2.0",
     "inquirer": "^7.1.0",
+    "mkdirp": "^1.0.4",
     "tslib": "^1"
   },
   "devDependencies": {
@@ -61,7 +66,7 @@
     ],
     "topics": {
       "eth": {
-        "description": "eth cool"
+        "description": "Ethereum JSONRPC Methods"
       }
     }
   },
@@ -71,7 +76,11 @@
     "posttest": "eslint . --ext .ts --config .eslintrc",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif-dev readme && git add README.md"
+    "version": "oclif-dev readme && git add README.md",
+    "build": "yarn run rmDist && yarn run compile",
+    "rmDist": "rm -rf ./dist",
+    "clean": "rm -rf ./node_modules ./dist",
+    "compile": "tsc -p tsconfig.json"
   },
   "types": "lib/index.d.ts"
 }

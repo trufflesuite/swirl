@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig-base.json",
+  "extends": "../../tsconfig.root.json",
   "compilerOptions": {
     "declaration": true,
     "importHelpers": true,
@@ -9,6 +9,9 @@
     "strict": true,
     "target": "es2017"
   },
+  "references": [
+    {"path": "../core"}
+  ],
   "include": [
     "src/**/*.ts"
   ]

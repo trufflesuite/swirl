@@ -1,7 +1,7 @@
 {
   "name": "@swirl/core",
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "lib/index.js",
   "license": "MIT",
   "author": "Nicholas J. Paterno @nicholasjpaterno",
   "repository": "trufflesuite/swirl",
@@ -9,7 +9,10 @@
   "bugs": "https://github.com/trufflesuite/swirl/issues",
   "scripts": {
     "start": "node ./build/index.js",
-    "build": "tsc"
+    "build": "yarn run rmDist && yarn run compile",
+    "rmDist": "rm -rf ./dist",
+    "clean": "rm -rf ./node_modules ./dist",
+    "compile": "tsc -p tsconfig.json"
   },
   "publishConfig": {
     "access": "public"

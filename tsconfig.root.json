@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",                       /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */
+    "module": "commonjs",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
+    "declaration": true,                      /* Generates corresponding '.d.ts' file. */
+    "declarationMap": true,                /* Generates a sourcemap for each corresponding '.d.ts' file. */
+    "composite": true,                        /* Enable project compilation */
+    "strict": true,                           /* Enable all strict type-checking options. */
+    "noUnusedLocals": true,                   /* Report errors on unused locals. */
+    "noUnusedParameters": true,               /* Report errors on unused parameters. */
+    "noImplicitReturns": true,                /* Report error when not all code paths in function return a value. */
+    "noFallthroughCasesInSwitch": true,       /* Report errors for fallthrough cases in switch statement. */
+    "skipLibCheck": true,                     /* If transitive dependencies have typing errors, ignore them. */
+    "baseUrl": ".",                       /* Base directory to resolve non-absolute module names. */
+    "paths": {
+      "@swirl/*": ["packages/*/src"],
+    },                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
+    "esModuleInterop": true,                  /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
+    "sourceMap": true,
+    "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */
+    "emitDecoratorMetadata": true         /* Enables experimental support for emitting type metadata for decorators. */
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "test"
+  ]
+}
