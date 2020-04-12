@@ -1,3 +1,3 @@
-# Swirl cord
+# Swirl core
 
 JSON RPC helper
