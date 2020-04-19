@@ -17,7 +17,7 @@ export class Config {
         type: 'number',
         minimum: 1024,
         maximum: 65535,
-        default: 1337,
+        default: 8545,
       },
     };
   }
