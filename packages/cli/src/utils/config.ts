@@ -24,7 +24,7 @@ export class Config {
 
   static options() {
     return {
-      schema: this.schema(),
+      schema: Config.schema(),
     } as Options<Schema>;
   }
 
@@ -34,23 +34,23 @@ export class Config {
   }
 
   static getConfig() {
-    return new Conf<Schema>(this.options());
+    return new Conf<Schema>(Config.options());
   }
 
   static current(): Schema {
-    const config = this.getConfig();
+    const config = Config.getConfig();
     const host = config.get('host');
     const port = config.get('port');
     return {host, port};
   }
 
   static set<K extends keyof Schema, T extends Schema[K]>(key: K, value: T) {
-    const config = this.getConfig();
+    const config = Config.getConfig();
     config.set(key, value);
   }
 
   static get<K extends keyof Schema>(key: K) {
-    const config = this.getConfig();
+    const config = Config.getConfig();
     return config.get(key);
   }
 
