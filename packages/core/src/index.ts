@@ -20,7 +20,9 @@ export class Swirl {
   }
 
   connection(host: string, port: number) {
-    this.provider.rpc = new RPC(host, port);
+    this.provider = {
+      rpc: new RPC(host, port),
+    };
     return this.provider;
   }
 
