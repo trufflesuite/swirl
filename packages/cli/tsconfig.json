@@ -2,11 +2,10 @@
   "extends": "../../tsconfig.root.json",
   "compilerOptions": {
     "declaration": true,
-    "module": "commonjs",
     "outDir": "lib",
     "rootDir": "src",
     "strict": true,
-    "target": "es2017"
+    "esModuleInterop": true
   },
   "references": [
     {"path": "../core"}
