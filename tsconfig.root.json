@@ -10,6 +10,8 @@
     "noUnusedLocals": true,                   /* Report errors on unused locals. */
     "noUnusedParameters": true,               /* Report errors on unused parameters. */
     "noImplicitReturns": true,                /* Report error when not all code paths in function return a value. */
+    "noImplicitAny": true,
+    "noImplicitThis": true,
     "noFallthroughCasesInSwitch": true,       /* Report errors for fallthrough cases in switch statement. */
     "skipLibCheck": true,                     /* If transitive dependencies have typing errors, ignore them. */
     "baseUrl": ".",                       /* Base directory to resolve non-absolute module names. */
