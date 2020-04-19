@@ -1,5 +1,6 @@
 import {Command, flags} from '@oclif/command';
 import {Swirl} from '@swirl/core';
+import {Config} from '../../utils/config';
 
 export default class Accounts extends Command {
   static description = `Returns a list of addresses owned by client.
@@ -25,7 +26,8 @@ Array of DATA, 20 Bytes - addresses owned by the client.
 
   async run() {
     // const {args, flags} = this.parse(EthAccounts);
-    const rpc = new Swirl();
+    const {host, port} = Config.current();
+    const rpc = new Swirl(host, port);
     // eslint-disable-next-line no-console
     console.log(await rpc.eth.accounts());
   }
